@@ -1,0 +1,12 @@
+{
+    "name": "RRRPy",
+    "description": "Python: API Staging for RRRPY (Beta)",
+    "require": {
+        "gunicorn": "20.1.0",
+        "gevent": "21.8.0",
+        "flask": "2.0.1"
+    },
+    "engines": {
+        "python": "3.8.18"
+    }
+}
