@@ -3,7 +3,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-# Use the PORT environment variable to specify the port
 port = int(os.environ.get("PORT", 8080))
 
 @app.route("/")
