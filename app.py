@@ -1,5 +1,6 @@
 import os
 import requests
+import bleach
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -28,6 +29,31 @@ def status_check():
 
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route("/api/htmlSanitize", methods=["GET"])
+def html_satinizer():
+    url = request.args.get('url')
+
+    try:
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            sanitized_html = bleach.clean(response.text)
+
+            response_data = {
+                "original_url": url,
+                "sanitized_html": sanitized_html
+            }
+        else:
+            response_data = {
+                "error": "Failed to retrieve HTML from the URL"
+            }
+    except Exception as e:
+        response_data = {
+            "error": str(e)
+        }
+
+    return jsonify(response_data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port)
