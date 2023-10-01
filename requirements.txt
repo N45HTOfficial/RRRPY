@@ -1,2 +1,4 @@
+os>=1.0,<2.0
 flask==2.0.1
 requests==2.26.0
+bleach==3.3.0
